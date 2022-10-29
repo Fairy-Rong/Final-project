@@ -1,7 +1,6 @@
 matplotlib
 pandas
 streamlit
-random
 select
 numpy
 folium
