@@ -1,10 +1,7 @@
 matplotlib
 pandas
 streamlit
-select
 numpy
-folium
-datetime
 folium
 folium.plugins
 streamlit_folium
