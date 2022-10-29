@@ -1,0 +1,15 @@
+matplotlib
+pandas
+streamlit
+random
+select
+numpy
+folium
+datetime
+folium
+folium.plugins
+streamlit_folium
+PIL
+turtle
+matplotlib.pyplot
+sklearn.cluster

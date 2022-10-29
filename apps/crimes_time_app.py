@@ -127,12 +127,17 @@ def app():
             'Choosing the slots',
             slots,
             slots)
+        arrest_filter = st.checkbox(
+            'Only see arrested')
         st.markdown('The day is divided into four equal time periods: midnight from 00:00 to 6:00, morning from 6:00 to 12:00, afternoon from 12:00 to 18:00 and night from 18:00 to 24:00.')
+
     with row2_2:
         st.subheader('Distribution of cases in different time periods')
         if slot_filter:
             slot_filter_list = [slot2num[i] for i in slot_filter]
             slot_df = df[df.Slot.isin(slot_filter_list)]
+            if arrest_filter:
+                slot_df = slot_df[slot_df['Arrest'] == True]
             plt.rcParams.update(rc)
             fig, ax = plt.subplots()
             slot_df.groupby([slot_df['Primary Type']]).size().sort_values(ascending=True).plot(kind='barh', color='#cf0c0c')
