@@ -5,5 +5,5 @@ numpy
 folium
 streamlit_folium
 turtle
-matplotlib.pyplot
-sklearn.cluster
+matplotlib
+sklearn
