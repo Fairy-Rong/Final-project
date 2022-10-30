@@ -1,6 +1,5 @@
 """Frameworks for running multiple Streamlit applications as a single app.
 """
-from turtle import color
 import streamlit as st
 
 class MultiApp:
