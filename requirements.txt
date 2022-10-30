@@ -3,7 +3,6 @@ pandas
 streamlit
 numpy
 folium
-folium.plugins
 streamlit_folium
 PIL
 turtle
