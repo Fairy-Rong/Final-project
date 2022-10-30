@@ -81,7 +81,7 @@ def app():
     row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))
     # with row0_2:
     #     st.text('')
-    #     st.subheader('Yerong Wu & Junjie Lai')
+    #     st.subheader('- The guilty secret in a busy city')
 
     # Image
     image = Image.open('skyline.jpg')
@@ -127,8 +127,15 @@ def app():
             'Choosing the slots',
             slots,
             slots)
+        ascending_filter = st.checkbox(
+            'In ascending order'
+            )
         arrest_filter = st.checkbox(
-            'Only see arrested')
+            'Only see NOT arrested'
+            )
+        domestic_filter = st.checkbox(
+            'Only see domestic violence'
+            )
         st.markdown('The day is divided into four equal time periods: midnight from 00:00 to 6:00, morning from 6:00 to 12:00, afternoon from 12:00 to 18:00 and night from 18:00 to 24:00.')
 
     with row2_2:
@@ -136,11 +143,18 @@ def app():
         if slot_filter:
             slot_filter_list = [slot2num[i] for i in slot_filter]
             slot_df = df[df.Slot.isin(slot_filter_list)]
+
             if arrest_filter:
-                slot_df = slot_df[slot_df['Arrest'] == True]
+                slot_df = slot_df[slot_df['Arrest'] == False]
+            if domestic_filter:
+                slot_df = slot_df[slot_df['Domestic'] == True]
+
             plt.rcParams.update(rc)
             fig, ax = plt.subplots()
-            slot_df.groupby([slot_df['Primary Type']]).size().sort_values(ascending=True).plot(kind='barh', color='#cf0c0c')
+            if ascending_filter:
+                slot_df.groupby([slot_df['Primary Type']]).size().sort_values(ascending=True).plot(kind='barh', color='#cf0c0c')
+            else:
+                slot_df.groupby([slot_df['Primary Type']]).size().plot(kind='barh', color='#cf0c0c')
             ax.set_ylabel('')
             ax.set_xlim(0, 50000)
             st.pyplot(fig)

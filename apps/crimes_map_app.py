@@ -9,6 +9,7 @@ from folium import plugins
 from folium.plugins import Draw
 from streamlit_folium import st_folium
 from PIL import Image
+import geocoder
 
 
 rc = {'figure.figsize':(8,4.5),
@@ -32,11 +33,11 @@ slot2num = {'Midnight':0,
                 'Night':3}
 
 
-def make_cluster_map(df, lat, log):
+def make_cluster_map(df, center, zoom, map_style):
     '''
     A function to creat a cluster map by using folium
     '''
-    chicago_cluster_map = folium.Map(location=[lat, log], zoom_start=10.5,tiles= 'Stamen Toner')
+    chicago_cluster_map = folium.Map(location=center, zoom_start=zoom, tiles= map_style)
     marker_cluster = plugins.MarkerCluster().add_to(chicago_cluster_map)
     for name, row in df.iterrows():
         popup_text = """
@@ -64,11 +65,11 @@ def make_cluster_map(df, lat, log):
 
     return chicago_cluster_map
 
-def make_heat_map(df, lat, log):
+def make_heat_map(df, center, zoom, map_style):
     '''
     A function to creat a heat map by using folium
     '''
-    chicago_heat_map = folium.Map(location=[lat, log], zoom_start=10.5,tiles= 'Stamen Toner')
+    chicago_heat_map = folium.Map(location=center, zoom_start=zoom ,tiles= map_style)
     points=[]
     l=[]
     lati =df['Latitude'].to_list()
@@ -89,6 +90,9 @@ def make_heat_map(df, lat, log):
     plugins.HeatMap(points).add_to(chicago_heat_map)
     return chicago_heat_map
 
+def geo_coder(location):
+    return geocoder.arcgis(location).latlng
+
 df = pd.read_csv('data/Chicago_crimes.csv').sample(10000)
 df.drop(columns=['Unnamed: 0'], inplace=True)
 df.Date = pd.to_datetime(df.Date)
@@ -102,14 +106,15 @@ df['Time']=df['Date'].dt.time
 sample = df.sample(5000)
 lat = df['Latitude'].mean()
 log = df['Longitude'].mean()
+center = [lat, log]
+zoom = 10.5
 
 def app(df=sample):
-
     st.title('Shadows in the Sun - The guilty secret in a busy city')
     row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))
     # with row0_2:
     #     st.text('')
-    #     st.subheader('Yerong Wu & Junjie Lai')
+    #     st.subheader('- The guilty secret in a busy city')
 
     # Image
     image = Image.open('skyline.jpg')
@@ -198,15 +203,46 @@ def app(df=sample):
 
     # Map
     st.header('Crime Map')
-    option = st.selectbox(
-    'Which map you want to see?',
-    ('Heat Map', 'Cluster Map'))
-    if option == 'Heat Map':
-        heat_map = make_heat_map(df, lat, log)
-        Draw(export=True).add_to(heat_map)
-        st.data = st_folium(heat_map,width=1500)
-    elif option == 'Cluster Map':
-        cluster_map = make_cluster_map(df, lat, log)
-        Draw(export=True).add_to(cluster_map)
-        st.data = st_folium(cluster_map,width=1500)
+    col5_1, col5_2 = st.columns(2)
+    with col5_1:
+        option = st.selectbox(
+        'Which map you want to see?',
+        ('Heat Map', 'Cluster Map'))
+    
+    with col5_2:
+        option_s = st.selectbox(
+        'Which map style you want?',
+        ('Black and White','Normal')
+        )
+
+    location_check = st.text_input('Movie title', '')
+
+    if option_s == 'Normal':
+        map_style = 'OpenStreetMap'
+    else:
+        map_style = 'Stamen Toner'
+    
+    new_center = geo_coder(location_check)
+
+    if new_center:
+        new_zoom = 15
+        if option == 'Heat Map':
+            heat_map = make_heat_map(df, new_center, new_zoom, map_style)
+            folium.Marker(location=new_center,icon=folium.Icon(color='red'),popup=folium.Popup(f'{location_check}',min_width = 300, max_width=500 )).add_to(heat_map)
+            Draw(export=True).add_to(heat_map)
+            st.data = st_folium(heat_map,width=1500)
+        elif option == 'Cluster Map':
+            cluster_map = make_cluster_map(df, new_center, new_zoom, map_style)
+            folium.Marker(location=new_center,icon=folium.Icon(color='red'),popup=folium.Popup(f'{location_check}',min_width = 300, max_width=500 )).add_to(cluster_map)
+            Draw(export=True).add_to(cluster_map)
+            st.data = st_folium(cluster_map,width=1500)
+    else:
+        if option == 'Heat Map':
+            heat_map = make_heat_map(df, center, zoom, map_style)
+            Draw(export=True).add_to(heat_map)
+            st.data = st_folium(heat_map,width=1500)
+        elif option == 'Cluster Map':
+            cluster_map = make_cluster_map(df, center, zoom, map_style)
+            Draw(export=True).add_to(cluster_map)
+            st.data = st_folium(cluster_map,width=1500)
 
