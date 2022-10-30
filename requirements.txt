@@ -4,6 +4,6 @@ streamlit
 numpy
 folium
 streamlit_folium
-turtle
+multiapp
 matplotlib
 sklearn
