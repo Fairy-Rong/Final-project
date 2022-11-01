@@ -9,7 +9,7 @@ import openai
 
 plt.style.use('seaborn')
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 
 rc = {'figure.figsize':(8,4.5),
