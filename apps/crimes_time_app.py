@@ -4,8 +4,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 from sklearn.cluster import AgglomerativeClustering as AC
+import openai
+
 
 plt.style.use('seaborn')
+
+openai.api_key = "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"
+
 
 rc = {'figure.figsize':(8,4.5),
           'axes.facecolor':'#0e1117',
@@ -76,14 +81,35 @@ df.index = pd.DatetimeIndex(df.Date)
 
 def app():
     st.title('Shadows in the Sun - The guilty secret in a busy city')
-    row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))
-    # with row0_2:
-    #     st.text('')
-    #     st.subheader('- The guilty secret in a busy city')
 
     # Image
     image = Image.open('skyline.jpg')
     st.image(image, caption='Hell is empty. The devil is on Chicago.')
+
+    # Artificial Intelligence Dialogue
+    user_inputs = st.text_input('Your question: ')
+    st.write('')
+    st.write('')
+
+    query = user_inputs.strip()
+
+    if query:
+        template =  "Human: What are your impressions of Chicago?\n"+ \
+                    "AI: I think Chicago is the capital of sin\n"
+        inputs = f'{template}Human: {query}\nAI:'
+
+        response = openai.Completion.create(
+        model="text-davinci-002",
+        prompt=inputs,
+        temperature=0.9,
+        max_tokens=150,
+        top_p=0.9,
+        frequency_penalty=0.0,
+        presence_penalty=0.6,
+        stop=[" Human:", " AI:"]
+        )
+        ai_output = response['choices'][0]['text'].strip()
+        st.text_area('Your Security Advisor: ', ai_output)
 
     # 是否通过案件类型查看案件随时间的走势
     st.text('')

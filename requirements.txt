@@ -8,3 +8,4 @@ multiapp
 matplotlib
 sklearn
 geocoder
+openai
