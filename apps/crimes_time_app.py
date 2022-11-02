@@ -10,8 +10,7 @@ import pickle
 
 plt.style.use('seaborn')
 
-with open('apikey.pickle', 'rb') as f: 
-    openai.api_key = pickle.load(f)
+openai.api_key = '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'
 
 
 rc = {'figure.figsize':(8,4.5),
