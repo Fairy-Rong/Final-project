@@ -11,7 +11,6 @@ plt.style.use('seaborn')
 
 openai.api_key = st.secrets['APIKEY']
 
-
 rc = {'figure.figsize':(8,4.5),
           'axes.facecolor':'#0e1117',
           'axes.edgecolor': '#0e1117',
