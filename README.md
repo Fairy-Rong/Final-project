@@ -5,6 +5,6 @@ Yerong Wu & Junjie Lai
 ## Dataset
 [Chicago Crime Dataset](https://www.kaggle.com/datasets/chicago/chicago-crime?search=crime)
 # Presentation
-
+[Presentation](https://github.com/Fairy-Rong/Final-project/blob/main/Group%2014-Final%20Presentation.pdf)
 # Data App
 [Streamlit Demo](https://fairy-rong-final-project-app-xm32au.streamlitapp.com/)
