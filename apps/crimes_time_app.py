@@ -9,8 +9,7 @@ import openai
 
 plt.style.use('seaborn')
 
-# openai.api_key = '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'
-st.secrets['APIKEY']
+openai.api_key = st.secrets['APIKEY']
 
 
 rc = {'figure.figsize':(8,4.5),
