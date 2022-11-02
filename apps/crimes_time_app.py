@@ -5,11 +5,13 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from sklearn.cluster import AgglomerativeClustering as AC
 import openai
+import pickle
 
 
 plt.style.use('seaborn')
 
-openai.api_key = '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'
+with open('apikey.pickle', 'rb') as f: 
+    openai.api_key = pickle.load(f)
 
 
 rc = {'figure.figsize':(8,4.5),
