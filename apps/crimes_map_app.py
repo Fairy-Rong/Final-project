@@ -214,7 +214,7 @@ def app(df=sample):
         ('Black and White','Normal')
         )
 
-    location_check = st.text_input('Movie title', '')
+    location_check = st.text_input('Type the location you want to search', '')
 
     if option_s == 'Normal':
         map_style = 'OpenStreetMap'
