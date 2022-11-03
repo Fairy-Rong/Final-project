@@ -15,7 +15,8 @@ This is the website for the final project.
 * Interactive Map
 * Artificial Intelligence Dialogue based on GPT-3
 ## Repository Structure
-| Folder/Code | Content                                                      |
+
+| **Folder/Code** | **Content**                                                      |
 | :---------- | ------------------------------------------------------------ |
 | .streamlit  | Contains the confiq.toml to set certain design parameters    |
 | data        | Contains the scraped (and cleaned) Chicago Crime data in CSV format |
