@@ -5,7 +5,7 @@ This is the website for the final project.
 ## Dataset
 [Chicago Crime Dataset](https://www.kaggle.com/datasets/chicago/chicago-crime?search=crime)
 ## Presentation
-[Presentation](https://github.com/Fairy-Rong/Final-project/blob/main/Group%2014-Final%20Presentation.pdf)
+[Presentation](https://github.com/Fairy-Rong/Final-project/blob/main/Team-14.pdf)
 ## Data App
 [Streamlit Demo](https://fairy-rong-final-project-app-xm32au.streamlitapp.com/)
 ## The functions in the App
