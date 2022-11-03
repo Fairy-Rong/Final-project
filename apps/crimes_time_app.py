@@ -86,6 +86,7 @@ def app():
     st.image(image, caption='Hell is empty. The devil is on Chicago.')
 
     # Artificial Intelligence Dialogue
+    st.subheader('Artificial Intelligence Dialogue')
     user_inputs = st.text_input('Your question: ')
     st.write('')
     st.write('')
