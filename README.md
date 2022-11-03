@@ -15,8 +15,6 @@ This is the website for the final project.
 * Interactive Map
 * Artificial Intelligence Dialogue based on GPT-3
 ## Repository Structure
-## Repository Structure
-
 | Folder/Code | Content                                                      |
 | :---------- | ------------------------------------------------------------ |
 | .streamlit  | Contains the confiq.toml to set certain design parameters    |
