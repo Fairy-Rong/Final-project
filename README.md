@@ -37,6 +37,7 @@ This dataset reflects reported incidents of crime (with the exception of murders
 | geojson     | Contains GeoJson of Chicago administrative district division |
 | multiapp.py | The python file used to implement multi-page functionality   |
 | app.py      | The python file to run                                       |
+|requirements.txt|Contains all requirements (necessary for Streamlit sharing)|
 
 
 
