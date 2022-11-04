@@ -1,6 +1,6 @@
 # Shadows in the Sun - A guilty secret in a busy city
 
-This is the website for the final project.
+### This is the website for the final project.
 ![picture](https://github.com/Fairy-Rong/Final-project/blob/main/skyline.jpg?raw=true)
 
 ## Introduction
@@ -11,6 +11,7 @@ Crime in Chicago has always been an issue well worth exploring, and since many o
 
 ## Dataset Description
 [Chicago Crime Dataset](https://www.kaggle.com/datasets/chicago/chicago-crime?search=crime)
+
 This dataset reflects reported incidents of crime (with the exception of murders where data exists for each victim) that occurred in the City of Chicago from 2012 to present. Dataset contains type of crime, date, location information, block, street, arrest or not, and latitude and longitude information.
 
 ## Presentation
